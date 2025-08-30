@@ -7,6 +7,8 @@ import typescript from '@rollup/plugin-typescript';
 
 export default {
   input: 'src/index.ts',
+  logLevel: 'debug',
+  treeshake: true, // <--- default to true
   output: [
     {
       file: 'dist/index.cjs.cjs',
