@@ -39,8 +39,6 @@ async function buildPackageConfig() {
 
   copyStaticFiles(outDirName);
 
-  updateVersionTemplates(outDirName); // <--- must come AFTER build!
-
   manipulatePackageJsonFile(outDirName); // <--- must come AFTER copy of static files
 
   printDoneMessage(startTime);
@@ -100,27 +98,8 @@ function copyStaticFiles(outDirName) {
 /**
  * @param {string} outDirName
  */
-function updateVersionTemplates(outDirName) {
-  console.log(`${COLORS.green}- Step 4:${COLORS.stop} update version templates with version from package.json`);
-
-  /** @type {PackageJson} */
-  const packageJson = JSON.parse(fs.readFileSync('./package.json').toString());
-  const { version } = packageJson;
-
-  const showVersionFuncPath = path.resolve(process.cwd(), outDirName, 'index.js');
-
-  const showVersionFuncContent = fs.readFileSync(showVersionFuncPath, 'utf-8');
-  const updatedShowVersionFuncContent = showVersionFuncContent.replace('{{version}}', version);
-  fs.writeFileSync(showVersionFuncPath, updatedShowVersionFuncContent);
-
-  console.log('');
-}
-
-/**
- * @param {string} outDirName
- */
 function manipulatePackageJsonFile(outDirName) {
-  console.log(`${COLORS.green}- Step 5:${COLORS.stop} copy & manipulate the package.json file`);
+  console.log(`${COLORS.green}- Step 4:${COLORS.stop} copy & manipulate the package.json file`);
 
   const packageJsonPath = path.resolve(ROOT_PROJECT, outDirName, 'package.json');
 
