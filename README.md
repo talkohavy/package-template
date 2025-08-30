@@ -1,1 +1,1 @@
-# lucky-server
+# package-template
